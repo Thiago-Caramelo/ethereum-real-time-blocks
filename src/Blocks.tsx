@@ -45,13 +45,11 @@ export default function Blocks() {
         params: ["newHeads"],
       };
       websocket.send(JSON.stringify(message));
-      //on new block add it to local state
     };
     websocket.onmessage = (event) => {
       const data: Block = JSON.parse(event.data);
       if (data?.params?.result?.number) {
         const blockNumber = parseInt(data.params.result.number);
-        console.log(blockNumber);
         setBlocks((currentState) => {
           const newState = [...currentState];
           newState.push(blockNumber);
@@ -63,7 +61,7 @@ export default function Blocks() {
 
   return (
     <Stack spacing={2}>
-      {blocks.map((block: any) => {
+      {blocks.map((block) => {
         return (
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -72,7 +70,7 @@ export default function Blocks() {
                 color="text.secondary"
                 gutterBottom
               >
-                Block Number: {block["number"]}
+                Block Number: {block}
               </Typography>
             </CardContent>
             <CardActions>
