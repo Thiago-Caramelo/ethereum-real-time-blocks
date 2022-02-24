@@ -4,10 +4,12 @@ import { request, gql } from "graphql-request";
 import { useQuery } from "react-query";
 import { Block } from "./types/block";
 import {
+  Box,
   Button,
   Card,
   CardActions,
   CardContent,
+  CircularProgress,
   Stack,
   Typography,
 } from "@mui/material";
@@ -60,25 +62,30 @@ export default function Blocks() {
   }, []);
 
   return (
-    <Stack spacing={2}>
-      {blocks.map((block) => {
-        return (
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Block Number: {block}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Load transactions</Button>
-            </CardActions>
-          </Card>
-        );
-      })}
-    </Stack>
+    <>
+      <Stack spacing={2}>
+        {blocks.map((block) => {
+          return (
+            <Card key={block}>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Block Number: {block}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Load transactions</Button>
+              </CardActions>
+            </Card>
+          );
+        })}
+      </Stack>
+      <Box sx={{ textAlign: "center" }} mt={"2rem"}>
+        <CircularProgress size={"1em"} />
+      </Box>
+    </>
   );
 }

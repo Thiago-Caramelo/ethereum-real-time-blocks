@@ -5,13 +5,21 @@ import { ThemeProvider } from "@mui/material/styles";
 import App from "./App";
 import theme from "./theme";
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-    <CssBaseline />
-    <App />
-  </ThemeProvider>,
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </QueryClientProvider>,
   document.getElementById("root")
 );
 
