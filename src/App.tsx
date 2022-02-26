@@ -3,6 +3,7 @@ import Container from "@mui/material/Container";
 import Blocks from "./Blocks";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Box } from "@mui/material";
+import Transactions from "./Transactions";
 
 function Layout() {
   return (
@@ -14,16 +15,12 @@ function Layout() {
   );
 }
 
-function Transactions() {
-  return <>Transactions</>;
-}
-
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Blocks />} />
-        <Route path="transactions" element={<Transactions />} />
+        <Route path="blocks/:id/transactions" element={<Transactions />} />
       </Route>
     </Routes>
   );

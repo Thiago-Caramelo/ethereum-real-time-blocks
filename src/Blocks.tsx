@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function useBlocks() {
   return useQuery("blocks", async () => {
@@ -39,7 +40,7 @@ export default function Blocks() {
   const [blocks, setBlocks] = useState<number[]>([]);
 
   useEffect(() => {
-    const websocket = new WebSocket("ws://192.168.101.100:8546");
+    const websocket = new WebSocket(process.env.REACT_APP_WS_SERVER!);
     websocket.onopen = () => {
       var message = {
         id: +new Date(),
@@ -59,6 +60,7 @@ export default function Blocks() {
         });
       }
     };
+    return () => websocket.close();
   }, []);
 
   return (
@@ -77,7 +79,9 @@ export default function Blocks() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small">Load transactions</Button>
+                <Link to={`/blocks/${block}/transactions`}>
+                  View transactions
+                </Link>
               </CardActions>
             </Card>
           );
